@@ -82,3 +82,41 @@ for t in ts
 end
 print(lines)
 write("003_mrp/04_mrp_z/rot_z.txt",lines)
+
+# Generate MRP around xy-axis
+ts = range(0,stop=2π,length=61)[1:end-1]
+lines = ""
+for t in ts
+    R1 = RotX(t)
+    R2 = RotY(t)
+    R = R1*R2
+    p = insideball(Rotations.params(MRP(R)))
+    R_v = vec(Matrix(R))
+    line = ""
+    line *= "<$(string(R_v[1:3])[2:end-1])>,"
+    line *= "<$(string(R_v[4:6])[2:end-1])>,"
+    line *= "<$(string(R_v[7:9])[2:end-1])>,"
+    line *= "<$(string(p)[2:end-1])>,"
+    lines *= line * "\n"
+end
+print(lines)
+write("003_mrp/05_mrp_xy/rot_xy.txt",lines)
+
+# Generate MRP around yx-axis
+ts = range(0,stop=2π,length=61)[1:end-1]
+lines = ""
+for t in ts
+    R1 = RotX(t)
+    R2 = RotY(t)
+    R = R2*R1
+    p = insideball(Rotations.params(MRP(R)))
+    R_v = vec(Matrix(R))
+    line = ""
+    line *= "<$(string(R_v[1:3])[2:end-1])>,"
+    line *= "<$(string(R_v[4:6])[2:end-1])>,"
+    line *= "<$(string(R_v[7:9])[2:end-1])>,"
+    line *= "<$(string(p)[2:end-1])>,"
+    lines *= line * "\n"
+end
+print(lines)
+write("003_mrp/05_mrp_xy/rot_yx.txt",lines)
