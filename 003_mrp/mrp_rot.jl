@@ -36,9 +36,9 @@ clipboard(string(p)[2:end-1])
 ts = range(0,stop=2π,length=61)[1:end-1]
 lines = ""
 for t in ts
-    R_x = RotX(t)
-    p = insideball(Rotations.params(MRP(R_x)))
-    R_v = vec(Matrix(R_x))
+    R = RotX(t)
+    p = insideball(Rotations.params(MRP(R)))
+    R_v = vec(Matrix(R))
     line = ""
     line *= "<$(string(R_v[1:3])[2:end-1])>,"
     line *= "<$(string(R_v[4:6])[2:end-1])>,"
@@ -53,9 +53,9 @@ write("003_mrp/02_mrp_x/rot_x.txt",lines)
 ts = range(0,stop=2π,length=61)[1:end-1]
 lines = ""
 for t in ts
-    R_x = RotY(t)
-    p = insideball(Rotations.params(MRP(R_x)))
-    R_v = vec(Matrix(R_x))
+    R = RotY(t)
+    p = insideball(Rotations.params(MRP(R)))
+    R_v = vec(Matrix(R))
     line = ""
     line *= "<$(string(R_v[1:3])[2:end-1])>,"
     line *= "<$(string(R_v[4:6])[2:end-1])>,"
@@ -70,9 +70,9 @@ write("003_mrp/03_mrp_y/rot_y.txt",lines)
 ts = range(0,stop=2π,length=61)[1:end-1]
 lines = ""
 for t in ts
-    R_x = RotZ(t)
-    p = insideball(Rotations.params(MRP(R_x)))
-    R_v = vec(Matrix(R_x))
+    R = RotZ(t)
+    p = insideball(Rotations.params(MRP(R)))
+    R_v = vec(Matrix(R))
     line = ""
     line *= "<$(string(R_v[1:3])[2:end-1])>,"
     line *= "<$(string(R_v[4:6])[2:end-1])>,"
