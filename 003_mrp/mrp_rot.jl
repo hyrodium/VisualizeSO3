@@ -173,8 +173,9 @@ M9 = [0 0 1;1 0 0;0 1 0]
 M10 = [0 0 1;-1 0 0;0 -1 0]
 M11 = [0 0 -1;1 0 0;0 -1 0]
 M12 = [0 0 -1;-1 0 0;0 1 0]
+Ms = [M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,M11,M12]
 
-Rs = RotMatrix3{Float64}[M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,M11,M12]
+Rs = RotMatrix3{Float64}.(Ms)
 
 lines = ""
 for R in Rs
@@ -203,3 +204,23 @@ for R in Rs
 end
 print(lines)
 write("003_mrp/09_mrp_6-8_/rot_6-8.txt",lines)
+
+# Generate 12-20 polyhedral group
+φ = (1+√5)/2
+V = [1,0,φ]
+Qs = [AngleAxis(t, V...) for t in range(0,2π,length=6)[1:5]]
+Rs = vec(RotMatrix3{Float64}[Q*M for Q in Qs, M in Ms])
+
+lines = ""
+for R in Rs
+    p = insideball(Rotations.params(MRP(R)))
+    R_v = vec(Matrix(R))
+    line = ""
+    line *= "<$(string(p)[2:end-1])>,"
+    lines *= line
+    lines *= "\n"
+end
+print(lines)
+write("003_mrp/10_mrp_12-20_/rot_12-20.txt",lines)
+
+[rad2deg(rotation_angle(R1/R2)) for R1 in Rs, R2 in Rs]
