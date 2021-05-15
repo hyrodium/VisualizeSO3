@@ -159,3 +159,31 @@ for t1 in ts
 end
 print(lines)
 write("003_mrp/07_mrp_xyx_solid/rot_xyx.txt",lines)
+
+# Generate 4-4 polyhedral group
+M1 = [1 0 0;0 1 0;0 0 1]
+M2 = [1 0 0;0 -1 0;0 0 -1]
+M3 = [-1 0 0;0 1 0;0 0 -1]
+M4 = [-1 0 0;0 -1 0;0 0 1]
+M5 = [0 1 0;0 0 1;1 0 0]
+M6 = [0 1 0;0 0 -1;-1 0 0]
+M7 = [0 -1 0;0 0 1;-1 0 0]
+M8 = [0 -1 0;0 0 -1;1 0 0]
+M9 = [0 0 1;1 0 0;0 1 0]
+M10 = [0 0 1;-1 0 0;0 -1 0]
+M11 = [0 0 -1;1 0 0;0 -1 0]
+M12 = [0 0 -1;-1 0 0;0 1 0]
+
+Rs = RotMatrix3{Float64}[M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,M11,M12]
+
+lines = ""
+for R in Rs
+    p = insideball(Rotations.params(MRP(R)))
+    R_v = vec(Matrix(R))
+    line = ""
+    line *= "<$(string(p)[2:end-1])>,"
+    lines *= line
+    lines *= "\n"
+end
+print(lines)
+write("003_mrp/08_mrp_4-4_/rot_4-4.txt",lines)
