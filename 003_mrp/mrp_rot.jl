@@ -187,3 +187,19 @@ for R in Rs
 end
 print(lines)
 write("003_mrp/08_mrp_4-4_/rot_4-4.txt",lines)
+
+# Generate 6-8 polyhedral group
+N = RotX(π/2)
+Rs = RotMatrix3{Float64}[M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,M11,M12,N*M1,N*M2,N*M3,N*M4,N*M5,N*M6,N*M7,N*M8,N*M9,N*M10,N*M11,N*M12]
+
+lines = ""
+for R in Rs
+    p = insideball(Rotations.params(MRP(R)))
+    R_v = vec(Matrix(R))
+    line = ""
+    line *= "<$(string(p)[2:end-1])>,"
+    lines *= line
+    lines *= "\n"
+end
+print(lines)
+write("003_mrp/09_mrp_6-8_/rot_6-8.txt",lines)
