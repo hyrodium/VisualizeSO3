@@ -141,9 +141,8 @@ end
 print(lines)
 write("003_mrp/06_mrp_xy_surface/rot_xy.txt",lines)
 
-# Generate MRP around xy-axis, as surface
+# Generate MRP around xyx-axis, as solid
 ts = range(0,stop=2π,length=21)
-# ts = range(0,stop=π,length=10)
 lines = ""
 for t1 in ts
     for t2 in ts
