@@ -120,3 +120,43 @@ for t in ts
 end
 print(lines)
 write("003_mrp/05_mrp_xy/rot_yx.txt",lines)
+
+# Generate MRP around xy-axis, as surface
+ts = range(0,stop=2π,length=41)
+# ts = range(0,stop=π,length=10)
+lines = ""
+for t1 in ts
+    for t2 in ts
+        R1 = RotX(t1)
+        R2 = RotY(t2)
+        R = R1*R2
+        p = insideball(Rotations.params(MRP(R)))
+        R_v = vec(Matrix(R))
+        line = ""
+        line *= "<$(string(p)[2:end-1])>,"
+        lines *= line
+    end
+    lines *= "\n"
+end
+print(lines)
+write("003_mrp/06_mrp_xy_surface/rot_xy.txt",lines)
+
+# Generate MRP around xy-axis, as surface
+ts = range(0,stop=2π,length=21)
+# ts = range(0,stop=π,length=10)
+lines = ""
+for t1 in ts
+    for t2 in ts
+        for t3 in ts
+            R = RotXYX(t1,t2,t3)
+            p = insideball(Rotations.params(MRP(R)))
+            R_v = vec(Matrix(R))
+            line = ""
+            line *= "<$(string(p)[2:end-1])>,"
+            lines *= line
+        end
+        lines *= "\n"
+    end
+end
+print(lines)
+write("003_mrp/07_mrp_xyx_solid/rot_xyx.txt",lines)
